@@ -25,6 +25,14 @@ WIDTH, HEIGHT = 450, 450
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Valorant Spike Timer")
 
+# NOVO: Carregar e definir o ícone da janela
+try:
+    icone_image = pygame.image.load('icon.ico')
+    pygame.display.set_icon(icone_image)
+except pygame.error as e:
+    print(f"Erro ao carregar o ícone: {e}")
+    # Opcional: Você pode querer sair do programa ou usar um ícone padrão
+
 # Cores
 WHITE = (255, 255, 255)
 DARK_GRAY = (40, 40, 40)
@@ -49,7 +57,7 @@ setting_mode = False
 custom_spike_time = 0.0
 
 # Variável para o checkbox
-blinking_enabled = True # Piscar ativado por padrão
+blinking_enabled = True
 
 # --- Carregar e Converter a Imagem da Spike ---
 try:
@@ -75,7 +83,6 @@ checkbox_rect = pygame.Rect(WIDTH - 140, 50, 20, 20)
 checkbox_text_pos = (WIDTH - 115, 60)
 
 def draw_buttons():
-    # CORREÇÃO: Declara a variável globalmente dentro da função
     global blinking_enabled
 
     pygame.draw.rect(screen, DARK_GRAY, config_button_rect, border_radius=5)
