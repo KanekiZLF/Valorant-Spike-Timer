@@ -4,6 +4,12 @@ Um temporizador de spike de Valorant simples e seguro para PC, criado com Python
 
 ---
 
+### Visão Geral do Aplicativo
+
+![Valorant Spike Timer Interface](https://img001.prntscr.com/file/img001/jcnbLXQdTsWXCATTHSGFxA.png)
+
+---
+
 ### Por que Usar? (Sem Risco de Banimento)
 
 Este aplicativo é totalmente seguro e pode ser usado sem medo de violar as regras da Riot Games. Aqui estão os motivos:
@@ -31,7 +37,7 @@ Este aplicativo é totalmente seguro e pode ser usado sem medo de violar as regr
 ### Como Instalar e Usar
 
 1.  **Baixe o executável** e os arquivos de recursos (o ícone e a imagem da spike) para uma mesma pasta.
-2.  **Execute o arquivo `Valorant Spike Timer.exe`**.
+2.  **Execute o arquivo `Valorant Spike Timer.exe`** (ou o nome que você definiu para o executável).
 3.  **No jogo,** use a tecla de atalho configurada (padrão: `F1`) ou o botão **"Iniciar"** para começar a contagem assim que a spike for plantada.
 
 ---
