@@ -12,6 +12,18 @@ import tkinter as tk
 from tkinter import Entry, Label, Button
 import webbrowser
 import ctypes
+import os
+
+# --- Função para encontrar o caminho correto para os recursos ---
+def resource_path(relative_path):
+    """Obtém o caminho absoluto para o recurso, para o PyInstaller."""
+    try:
+        # Caminho para o diretório temporário do PyInstaller
+        base_path = sys._MEIPASS
+    except Exception:
+        # Caminho para a pasta do script
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 # Esconde a janela principal do Tkinter
 root = tk.Tk()
@@ -25,13 +37,14 @@ WIDTH, HEIGHT = 450, 450
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Valorant Spike Timer")
 
-# NOVO: Carregar e definir o ícone da janela
+# Carregar e definir o ícone da janela
 try:
-    icone_image = pygame.image.load('icon.ico')
+    icone_image = pygame.image.load(resource_path('icon.ico'))
     pygame.display.set_icon(icone_image)
 except pygame.error as e:
     print(f"Erro ao carregar o ícone: {e}")
-    # Opcional: Você pode querer sair do programa ou usar um ícone padrão
+except FileNotFoundError:
+    print("Erro: O arquivo 'icon.ico' não foi encontrado.")
 
 # Cores
 WHITE = (255, 255, 255)
@@ -61,7 +74,7 @@ blinking_enabled = True
 
 # --- Carregar e Converter a Imagem da Spike ---
 try:
-    pil_image = Image.open('spike.webp').convert('RGBA')
+    pil_image = Image.open(resource_path('spike.webp')).convert('RGBA')
     pygame_image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
     spike_size = (200, 200)
     pygame_image = pygame.transform.scale(pygame_image, spike_size)
@@ -84,16 +97,20 @@ checkbox_text_pos = (WIDTH - 115, 60)
 
 def draw_buttons():
     global blinking_enabled
-
     pygame.draw.rect(screen, DARK_GRAY, config_button_rect, border_radius=5)
     text = font_button.render("Configurar Tecla", True, WHITE)
     text_rect = text.get_rect(center=config_button_rect.center)
     screen.blit(text, text_rect)
-
     pygame.draw.rect(screen, DARK_GRAY, about_button_rect, border_radius=5)
     text = font_button.render("Sobre", True, WHITE)
     text_rect = text.get_rect(center=about_button_rect.center)
     screen.blit(text, text_rect)
+    
+    # NOVO: Exibe a tecla de atalho atual no centro superior
+    hotkey_label_text = f"Atalho: {configured_key.upper()}"
+    hotkey_label = font_button.render(hotkey_label_text, True, WHITE)
+    hotkey_rect = hotkey_label.get_rect(center=(WIDTH // 2, 25))
+    screen.blit(hotkey_label, hotkey_rect)
     
     pygame.draw.rect(screen, DARK_GRAY, start_stop_button_rect, border_radius=5)
     text_start_stop = "Parar" if timer_active else "Iniciar"
@@ -116,10 +133,8 @@ def draw_buttons():
 
 def toggle_timer(e=None):
     global timer_active, start_time, remaining_time, setting_mode, custom_spike_time
-
     if setting_mode:
         return
-    
     if not timer_active:
         timer_active = True
         start_time = pygame.time.get_ticks() - (TIME_OFFSET * 1000)
@@ -131,12 +146,9 @@ def toggle_timer(e=None):
 
 def draw_timer():
     global remaining_time, timer_active, start_time, custom_spike_time
-    
     if setting_mode:
         return
-    
     start_time_value = custom_spike_time if custom_spike_time > 0 else SPIKE_TIME
-
     if not timer_active:
         remaining_time = start_time_value
     else:
@@ -144,12 +156,10 @@ def draw_timer():
         remaining_time = max(0, start_time_value - elapsed_time)
         if remaining_time == 0:
             timer_active = False
-
     display_time = int(remaining_time)
     text_time = font_time.render(f"{display_time:02d}", True, WHITE)
     text_rect = text_time.get_rect(center=(WIDTH // 2, 120))
     screen.blit(text_time, text_rect)
-
     blink_speed = 0
     spike_color = WHITE
     if remaining_time > TRANSITION_TIME:
@@ -165,7 +175,6 @@ def draw_timer():
             )
         else:
             spike_color = RED
-            
         lerp_value_blink = 1 - (remaining_time / TRANSITION_TIME)
         start_blink_speed = 1.5
         end_blink_speed = 0.2
@@ -174,19 +183,15 @@ def draw_timer():
         spike_color = RED
         blink_speed = 0.2
         remaining_time = 0
-
     current_time = pygame.time.get_ticks() / 1000.0
-    
     spike_surface = pygame_image.copy()
     spike_surface.fill(spike_color, special_flags=pygame.BLEND_RGBA_MULT)
-    
     if timer_active and blinking_enabled:
         alpha_factor = (math.sin(current_time * (2 * math.pi / blink_speed)) + 1) / 2.0
         alpha = int(255 * alpha_factor)
         spike_surface.set_alpha(alpha)
     else:
         spike_surface.set_alpha(255)
-
     screen.blit(spike_surface, spike_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 50)))
 
 def show_about_window():
@@ -238,7 +243,7 @@ def get_spike_time_input():
     input_win.geometry(f'{win_width}x{win_height}+{int(x)}+{int(y)}')
     input_win.configure(bg="#252525")
     input_win.resizable(False, False)
-    Label(input_win, text="Tempo da Spike (segundos):", bg="#252525", fg="white", font=("Arial", 10)).pack(pady=(5,0))
+    tk.Label(input_win, text="Tempo da Spike (segundos):", bg="#252525", fg="white", font=("Arial", 10)).pack(pady=(5,0))
     entry_field = Entry(input_win, width=10)
     entry_field.insert(0, str(int(custom_spike_time if custom_spike_time > 0 else SPIKE_TIME)))
     entry_field.pack(pady=(5,0))
@@ -256,7 +261,7 @@ def get_spike_time_input():
             custom_spike_time = 0.0
             print("Entrada inválida. Usando o padrão de 45 segundos.")
         input_win.destroy()
-    Button(input_win, text="OK", command=on_set, bg="#404040", fg="white", bd=0, relief="flat", font=("Arial", 10)).pack(pady=(5,0))
+    tk.Button(input_win, text="OK", command=on_set, bg="#404040", fg="white", bd=0, relief="flat", font=("Arial", 10)).pack(pady=(5,0))
     entry_field.bind("<Return>", on_set)
     entry_field.focus_set()
     input_win.grab_set()
