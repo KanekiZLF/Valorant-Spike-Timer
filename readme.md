@@ -1,45 +1,38 @@
 # Valorant Spike Timer
 
-Este é um temporizador de spike de Valorant simples e leve, criado com Python e as bibliotecas Pygame e Tkinter. O objetivo do projeto é oferecer uma ferramenta prática para ajudar jogadores a gerenciar o tempo da spike de forma eficiente, melhorando a tomada de decisões durante as rodadas.
+Um temporizador de spike de Valorant simples e seguro para PC, criado com Python e Pygame. Este aplicativo foi desenvolvido para ajudar jogadores a gerenciar o tempo da spike de forma eficiente, aprimorando a tomada de decisões durante as rodadas.
 
 ---
 
-### Por que usar?
+### Por que Usar? (Sem Risco de Banimento)
 
-O Valorant Spike Timer foi desenvolvido com foco total na segurança do jogador. Você pode usá-lo sem se preocupar em ser banido, e aqui está o motivo:
+Este aplicativo é totalmente seguro e pode ser usado sem medo de violar as regras da Riot Games. Aqui estão os motivos:
 
-1.  **Não interfere com o jogo:** Este aplicativo não lê, injeta ou modifica nenhum dado do cliente do jogo Valorant. Ele funciona como uma ferramenta externa e independente, baseada em tempo real.
-2.  **Não utiliza a API do jogo:** A Riot Games, desenvolvedora do Valorant, oferece uma API para desenvolvedores de terceiros. No entanto, ela não fornece dados de tempo da partida em tempo real, como o momento em que a spike é plantada. Nosso aplicativo contorna essa limitação usando um temporizador manual, ativado pelo usuário.
-3.  **Totalmente manual:** A contagem do tempo da spike é iniciada manualmente por você, através de uma tecla de atalho. Isso significa que a ferramenta não automatiza nenhuma ação do jogo. Ela é apenas um auxílio visual para o jogador.
+1.  **Não Interfere com o Jogo:** O `Valorant Spike Timer` não lê a memória do jogo, não injeta código e não interage com o cliente do jogo de forma alguma. Ele é uma ferramenta externa e independente que opera na sua área de trabalho.
 
-Ferramentas que interagem diretamente com o cliente do jogo ou que automatizam ações podem levar a banimentos, mas este temporizador não faz nada disso. Ele é seguro porque o controle está sempre nas mãos do jogador.
+2.  **Totalmente Manual:** A contagem do tempo da spike é iniciada e parada por você, através de um clique ou de uma tecla de atalho. A ferramenta é um auxílio visual e não automatiza nenhuma ação, o que a torna inofensiva para a política de anti-cheat do Vanguard.
+
+3.  **Não Utiliza a API do Jogo:** A API de jogos do Valorant não fornece dados de tempo em tempo real da partida. Nosso aplicativo contorna essa limitação com um temporizador manual preciso, garantindo que não há comunicação não autorizada com os servidores do jogo.
 
 ---
 
 ### Funcionalidades
 
-- **Temporizador Preciso:** Inicie a contagem regressiva de 45 segundos da spike com uma tecla de atalho.
-- **Controle Visual:** A spike na tela muda de cor (de verde para vermelho) e pisca gradualmente mais rápido conforme o tempo acaba, oferecendo um alerta visual claro.
-- **Controle por Botão:** Inicie e pare o temporizador também com botões na interface.
-- **Piscar Customizável:** Uma opção para ativar ou desativar o efeito de piscar da spike.
+- **Controle por Tecla de Atalho:** Inicie e pare o temporizador com uma tecla de atalho de sua preferência. A tecla configurada é sempre exibida na tela.
+- **Botões na Interface:** Inicie, pare e configure o tempo do temporizador diretamente com botões na interface.
+- **Temporizador Dinâmico:** O tempo restante da spike é exibido em números grandes.
+- **Indicador Visual:** A spike muda de cor (de verde para vermelho) e pisca gradualmente mais rápido conforme o tempo acaba, fornecendo um alerta visual claro.
+- **Piscar Customizável:** Uma opção de **"Piscar"** permite que você ative ou desative o efeito de pulsação da spike a qualquer momento.
 - **Tempo Definível:** Um campo de texto para definir um tempo de spike customizado, útil para treinos ou modos de jogo específicos.
-- **Configuração de Atalho:** Mude a tecla de atalho facilmente através de um modo de configuração intuitivo.
-- **Janelas Centralizadas:** A caixa de diálogo "Sobre" e a tela de configuração de tempo são centralizadas na janela do aplicativo, proporcionando uma experiência de usuário mais agradável.
+- **Interface Limpa e Centralizada:** A caixa de diálogo **"Sobre"** e a tela de configuração de tempo são centralizadas na janela do aplicativo, proporcionando uma experiência de usuário mais agradável.
 
 ---
 
-### Como Usar
+### Como Instalar e Usar
 
-1.  **Baixe** todos os arquivos do projeto para uma mesma pasta.
-2.  **Abra o Terminal** e instale as bibliotecas necessárias:
-    ```bash
-    pip install pygame pillow keyboard
-    ```
-3.  **Execute o programa:**
-    ```bash
-    python main.py
-    ```
-4.  **No jogo,** use a tecla de atalho configurada (padrão: `F1`) para iniciar e parar o temporizador.
+1.  **Baixe o executável** e os arquivos de recursos (o ícone e a imagem da spike) para uma mesma pasta.
+2.  **Execute o arquivo `Valorant Spike Timer.exe`** (ou o nome que você definiu para o executável).
+3.  **No jogo,** use a tecla de atalho configurada (padrão: `F1`) ou o botão **"Iniciar"** para começar a contagem assim que a spike for plantada.
 
 ---
 
@@ -48,3 +41,5 @@ Ferramentas que interagem diretamente com o cliente do jogo ou que automatizam a
 **Luiz F. R. Pimentel**
 
 - [GitHub](https://github.com/KanekiZLF)
+
+---
